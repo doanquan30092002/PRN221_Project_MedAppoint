@@ -12,9 +12,10 @@ namespace PRN221_Project_MedAppoint.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            HttpContext.Session.Remove("user");
+            return Redirect("/loginuser");
         }
     }
 }
