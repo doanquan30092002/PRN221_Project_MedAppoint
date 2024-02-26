@@ -18,5 +18,6 @@ namespace PRN221_Project_MedAppoint.Model
         [Column(TypeName = "NTEXT")]
         public string? HealthHistory { get; set; }
         public Users User { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

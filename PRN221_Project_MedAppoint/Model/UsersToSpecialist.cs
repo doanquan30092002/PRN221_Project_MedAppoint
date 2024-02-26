@@ -10,5 +10,6 @@ namespace PRN221_Project_MedAppoint.Model
         public int? SpecialtyID { get; set; }
         public Users User { get; set; }
         public Specialist Specialist { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

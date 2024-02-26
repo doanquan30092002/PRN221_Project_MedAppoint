@@ -4,9 +4,9 @@ using PRN221_Project_MedAppoint.Model;
 using System.Text;
 using System.Text.Json;
 
-namespace PRN221_Project_MedAppoint.Areas.Admin.Pages
+namespace PRN221_Project_MedAppoint.Areas.User.Pages
 {
-    public class ManagePaymentModel : PageModel
+    public class ErrorModel : PageModel
     {
         public IActionResult OnGet()
         {
@@ -16,19 +16,11 @@ namespace PRN221_Project_MedAppoint.Areas.Admin.Pages
                 string serializedUser = Encoding.UTF8.GetString(userBytes);
                 Users u = JsonSerializer.Deserialize<Users>(serializedUser);
                 ViewData["user"] = u;
-                if (u.RoleID == 1)
-                {
-                    return Page();
-                }
-                else
-                {
-                    return RedirectToPage("/Error", new { area = "User" });
-                }
-
+                return Page();
             }
             else
             {
-                return RedirectToPage("/Index", new { area = "Admin" });
+                return RedirectToPage("/Login", new { area = "User" });
             }
         }
     }

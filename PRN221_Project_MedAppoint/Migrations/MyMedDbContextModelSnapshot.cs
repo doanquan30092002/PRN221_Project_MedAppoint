@@ -36,6 +36,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("Date");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("SpecialtyID")
                         .HasColumnType("int");
 
@@ -43,7 +46,8 @@ namespace PRN221_Project_MedAppoint.Migrations
                         .HasColumnType("Date");
 
                     b.Property<string>("Status")
-                        .HasColumnType("varchar");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int?>("UserID")
                         .HasColumnType("int");
@@ -73,6 +77,12 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("Date");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Reasons")
+                        .HasColumnType("Ntext");
+
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("Date");
 
@@ -96,6 +106,9 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.Property<int?>("DoctorID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ReviewDate")
                         .HasColumnType("Date");
@@ -122,6 +135,9 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.Property<int?>("AppointmentID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("Date");
@@ -159,6 +175,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<float?>("Height")
                         .HasColumnType("real");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Medications")
                         .HasColumnType("NTEXT");
 
@@ -189,6 +208,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<int?>("AppointmentID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Message")
                         .HasColumnType("NTEXT");
 
@@ -215,6 +237,9 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"), 1L, 1);
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
 
@@ -230,6 +255,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpecialtyID"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SpecialtyName")
                         .HasColumnType("nvarchar(max)");
@@ -252,12 +280,16 @@ namespace PRN221_Project_MedAppoint.Migrations
                         .HasColumnType("NVARCHAR(255)");
 
                     b.Property<string>("Avatar")
-                        .HasColumnType("VARCHAR");
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("Gender")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
@@ -268,9 +300,6 @@ namespace PRN221_Project_MedAppoint.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoleID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SpecialtyID")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
@@ -291,6 +320,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsersToSpecialistID"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SpecialistSpecialtyID")
                         .HasColumnType("int");

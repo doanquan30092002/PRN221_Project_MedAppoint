@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace PRN221_Project_MedAppoint.Areas.Admin.Pages
 {
-    public class ManagePaymentModel : PageModel
+    public class ManageSpecialistModel : PageModel
     {
         public IActionResult OnGet()
         {

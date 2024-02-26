@@ -17,7 +17,15 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                 Users u = JsonSerializer.Deserialize<Users>(serializedUser);
                 ViewData["user"] = u;
                 ViewData["CheckHomeScreen"] = "true";
-                return Page();
+                if (u.RoleID == 2)
+                {
+                    return Page();
+                }
+                else
+                {
+                    return RedirectToPage("/Error", new { area = "User" });
+                }
+                
             }
             else
             {

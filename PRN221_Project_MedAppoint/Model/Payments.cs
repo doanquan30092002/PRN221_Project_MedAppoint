@@ -16,5 +16,6 @@ namespace PRN221_Project_MedAppoint.Model
         public string? Message { get; set; }
         public Users User { get; set; }
         public Appointments Appointment { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

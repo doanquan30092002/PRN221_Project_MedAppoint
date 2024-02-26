@@ -15,5 +15,6 @@ namespace PRN221_Project_MedAppoint.Model
         [Column(TypeName = "Date")]
         public DateTime? LastUpdated { get; set; }
         public Appointments Appointment { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

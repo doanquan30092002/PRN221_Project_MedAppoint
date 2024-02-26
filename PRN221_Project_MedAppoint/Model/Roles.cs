@@ -7,5 +7,6 @@ namespace PRN221_Project_MedAppoint.Model
         [Key]
         public int RoleID { get; set; }
         public string? RoleName { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

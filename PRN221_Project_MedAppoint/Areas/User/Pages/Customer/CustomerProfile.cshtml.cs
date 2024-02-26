@@ -16,11 +16,18 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                 string serializedUser = Encoding.UTF8.GetString(userBytes);
                 Users u = JsonSerializer.Deserialize<Users>(serializedUser);
                 ViewData["user"] = u;
-                return Page();
+                if (u.RoleID == 2)
+                {
+                    return Page();
+                }
+                else
+                {
+                    return RedirectToPage("/Error", new { area = "User" });
+                }
             }
             else
             {
-                return RedirectToPage("/Login", new { area = "Customer" });
+                return RedirectToPage("/Login", new { area = "User" });
             }
         }
     }

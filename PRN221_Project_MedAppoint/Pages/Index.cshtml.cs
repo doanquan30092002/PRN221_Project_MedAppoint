@@ -15,7 +15,7 @@ namespace PRN221_Project_MedAppoint.Pages
         public IActionResult OnGet()
         {
             HttpContext.Session.Remove("user");
-            return Redirect("/loginuser");
+            return Redirect("/login-user");
         }
     }
 }

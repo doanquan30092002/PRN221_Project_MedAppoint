@@ -15,5 +15,6 @@ namespace PRN221_Project_MedAppoint.Model
         public DateTime? ReviewDate { get; set; }
         public Users User { get; set; }
         public Users Doctor { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

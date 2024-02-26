@@ -7,5 +7,6 @@ namespace PRN221_Project_MedAppoint.Model
         [Key]
         public int SpecialtyID { get; set; }
         public string? SpecialtyName { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

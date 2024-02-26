@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace PRN221_Project_MedAppoint.Areas.Admin.Pages
 {
-    public class ManagePaymentModel : PageModel
+    public class CreateDoctorModel : PageModel
     {
         public IActionResult OnGet()
         {
@@ -16,7 +16,7 @@ namespace PRN221_Project_MedAppoint.Areas.Admin.Pages
                 string serializedUser = Encoding.UTF8.GetString(userBytes);
                 Users u = JsonSerializer.Deserialize<Users>(serializedUser);
                 ViewData["user"] = u;
-                if (u.RoleID == 1)
+                if (u.RoleID==1)
                 {
                     return Page();
                 }
@@ -24,7 +24,7 @@ namespace PRN221_Project_MedAppoint.Areas.Admin.Pages
                 {
                     return RedirectToPage("/Error", new { area = "User" });
                 }
-
+                
             }
             else
             {

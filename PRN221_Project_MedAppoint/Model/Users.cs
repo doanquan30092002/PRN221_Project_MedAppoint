@@ -18,15 +18,16 @@ namespace PRN221_Project_MedAppoint.Model
         public string? Email { get; set; }
         [Phone]
         public string? Phone { get; set; }
-        public int? SpecialtyID { get; set; }
         [Column(TypeName = "NVARCHAR")]
         [StringLength(255)]
         public string? Address { get; set; }
         public int? RoleID { get; set; }
         [Column(TypeName = "VARCHAR")]
+        [StringLength(255)]
         public string? Avatar { get; set; }
         public bool? Gender { get; set; }
 
         public Roles Role { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
