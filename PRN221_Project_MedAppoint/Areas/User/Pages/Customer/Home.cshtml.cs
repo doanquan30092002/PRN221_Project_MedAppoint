@@ -16,6 +16,7 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                 string serializedUser = Encoding.UTF8.GetString(userBytes);
                 Users u = JsonSerializer.Deserialize<Users>(serializedUser);
                 ViewData["user"] = u;
+                ViewData["CheckHomeScreen"] = "true";
                 return Page();
             }
             else

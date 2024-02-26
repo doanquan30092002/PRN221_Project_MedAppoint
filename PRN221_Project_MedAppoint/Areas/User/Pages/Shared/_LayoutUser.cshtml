@@ -54,7 +54,7 @@
     </div>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top mb-5">
+    <header id="header" class="fixed-top mb-5" style="margin-bottom: 50px">
         <div class="container d-flex align-items-center">
 
             <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>
@@ -63,18 +63,15 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    @if (u.RoleID == 1)
+                    @if (u.RoleID == 2)
                     {
-
-
-
-                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Index">Home</a></li>
+                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/Home">Home</a></li>
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/About">About</a></li>
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Services">Services</a></li>
                     }
 
-                    <li><a class="nav-link scrollto" asp-area="User" asp-page="/Departments">Departments</a></li>
-                    <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctors">Doctors</a></li>
+                    @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Departments">Departments</a></li>
+                    <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctors">Doctors</a></li> *@
                     <li class="dropdown">
                         <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
@@ -82,12 +79,12 @@
                             <li class="dropdown">
                                 <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
+                                    <li><a href="#">Down 4</a></li>
+                                    <li><a href="#">Deep Drop Down 5</a></li>
+                                    <li></ul>eep Drop Down 1</a></li>
                                     <li><a href="#">Deep Drop Down 2</a></li>
                                     <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
+                                    <li><a href="#">Deep Drop D
                             </li>
                             <li><a href="#">Drop Down 2</a></li>
                             <li><a href="#">Drop Down 3</a></li>
@@ -110,18 +107,19 @@
 
         </div>
     </header><!-- End Header -->
-    <!-- ======= Hero Section ======= -->
-    @* @if ('HOME')
-    {
-    @RenderBody()
 
+    <!-- ======= Hero Section ======= -->
+    @if (ViewData["CheckHomeScreen"] != null)
+    {
+        @RenderBody()
     }
     else {
-    <main id="main">
-    @RenderBody()
-    </main>
-    } *@
-    @RenderBody()
+        <main id="main" style="margin-top: 150px">
+        @RenderBody()
+        </main>
+    }
+    <!-- ======= Hero Section ======= -->
+
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
