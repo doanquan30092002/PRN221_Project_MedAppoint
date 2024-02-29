@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using PRN221_Project_MedAppoint.Model;
+
 namespace PRN221_Project_MedAppoint
 {
     public class Program
@@ -8,7 +11,13 @@ namespace PRN221_Project_MedAppoint
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddSession();
 
+            builder.Services.AddDbContext<MyMedDbContext>(options =>
+            {
+                string connectString = builder.Configuration.GetConnectionString("MyMedDbContext");
+                options.UseSqlServer(connectString);
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -21,7 +30,7 @@ namespace PRN221_Project_MedAppoint
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
