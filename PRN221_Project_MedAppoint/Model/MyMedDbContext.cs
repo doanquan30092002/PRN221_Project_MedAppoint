@@ -29,7 +29,5 @@ namespace PRN221_Project_MedAppoint.Model
         public DbSet<ElectronicMedicalRecords> ElectronicMedicalRecords { get; set; }
         public DbSet<Payments> Payments { get; set; }
         public DbSet<DoctorReviews> DoctorReviews { get; set; }
-        public DbSet<Services> Services { get; set; }
-        public DbSet<SpecialistToService> SpecialistToServices { get; set; }
     }
 }

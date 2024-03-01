@@ -29,7 +29,9 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                 if (u.RoleID == 2)
                 {
                     Users = await _context.Users
-                    .Include(u => u.Role).ToListAsync();
+                                        .Include(u => u.Role)
+                                        .Where(u => u.RoleID == 3)
+                                        .ToListAsync();
                     return Page();
                 }
                 else

@@ -60,7 +60,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.DoctorDayOff", b =>
@@ -90,7 +90,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("DoctorID");
 
-                    b.ToTable("DoctorDayOffs");
+                    b.ToTable("DoctorDayOffs", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.DoctorReviews", b =>
@@ -122,7 +122,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("DoctorReviews");
+                    b.ToTable("DoctorReviews", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.ElectronicMedicalRecords", b =>
@@ -152,7 +152,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("AppointmentID");
 
-                    b.ToTable("ElectronicMedicalRecords");
+                    b.ToTable("ElectronicMedicalRecords", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.HealthInformation", b =>
@@ -191,7 +191,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("HealthInformations");
+                    b.ToTable("HealthInformations", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Payments", b =>
@@ -226,7 +226,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Roles", b =>
@@ -245,32 +245,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasKey("RoleID");
 
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Services", b =>
-                {
-                    b.Property<int>("ServiceID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceID"), 1L, 1);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("Price")
-                        .IsRequired()
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ServiceName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ServiceID");
-
-                    b.ToTable("Services");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Specialist", b =>
@@ -289,30 +264,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasKey("SpecialtyID");
 
-                    b.ToTable("Specialists");
-                });
-
-            modelBuilder.Entity("PRN221_Project_MedAppoint.Model.SpecialistToService", b =>
-                {
-                    b.Property<int>("SpecialistToServiceID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpecialistToServiceID"), 1L, 1);
-
-                    b.Property<int>("ServiceID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SpecialistID")
-                        .HasColumnType("int");
-
-                    b.HasKey("SpecialistToServiceID");
-
-                    b.HasIndex("ServiceID");
-
-                    b.HasIndex("SpecialistID");
-
-                    b.ToTable("SpecialistToServices");
+                    b.ToTable("Specialists", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Users", b =>
@@ -358,7 +310,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("RoleID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.UsersToSpecialist", b =>
@@ -387,7 +339,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("UsersToSpecialists");
+                    b.ToTable("UsersToSpecialists", (string)null);
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Appointments", b =>
@@ -466,25 +418,6 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Navigation("Appointment");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PRN221_Project_MedAppoint.Model.SpecialistToService", b =>
-                {
-                    b.HasOne("PRN221_Project_MedAppoint.Model.Services", "Services")
-                        .WithMany()
-                        .HasForeignKey("ServiceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PRN221_Project_MedAppoint.Model.Specialist", "Specialist")
-                        .WithMany()
-                        .HasForeignKey("SpecialistID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Services");
-
-                    b.Navigation("Specialist");
                 });
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Users", b =>
