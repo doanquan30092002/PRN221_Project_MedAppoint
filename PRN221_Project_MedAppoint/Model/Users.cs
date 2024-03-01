@@ -39,5 +39,7 @@ namespace PRN221_Project_MedAppoint.Model
 
         public Roles Role { get; set; }
         public bool IsDeleted { get; set; } = false;
+
+        public ICollection<UsersToSpecialist> UsersToSpecialists { get; set; }
     }
 }

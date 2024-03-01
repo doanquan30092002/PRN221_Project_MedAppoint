@@ -9,14 +9,14 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
 {
     public class BookDoctorModel : PageModel
     {
-        private readonly PRN221_Project_MedAppoint.Model.MyMedDbContext _context;
+        private readonly MyMedDbContext _context;
 
         public BookDoctorModel(MyMedDbContext context)
         {
             _context = context;
         }
 
-        public IList<Users> Users { get; set; } = default!;
+        public IList<UserWithSpecialtiesViewModel> Users { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -28,10 +28,18 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                 ViewData["user"] = u;
                 if (u.RoleID == 2)
                 {
-                    Users = await _context.Users
+                    Users = _context.Users
                                         .Include(u => u.Role)
+                                        .Include(u => u.UsersToSpecialists)
+                                            .ThenInclude(us => us.Specialist)
                                         .Where(u => u.RoleID == 3)
-                                        .ToListAsync();
+                                        .Select(u => new UserWithSpecialtiesViewModel
+                                        {
+                                            User = u,
+                                            Specialties = u.UsersToSpecialists.Select(us => us.Specialist.SpecialtyName).ToList()
+                                        })
+                                        .ToList();
+
                     return Page();
                 }
                 else
@@ -45,7 +53,11 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
             }
         }
 
-
+        public class UserWithSpecialtiesViewModel
+        {
+            public Users User { get; set; }
+            public List<string> Specialties { get; set; }
+        }
 
     }
 }

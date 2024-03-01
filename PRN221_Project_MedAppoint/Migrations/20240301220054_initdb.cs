@@ -27,14 +27,14 @@ namespace PRN221_Project_MedAppoint.Migrations
                 name: "Specialists",
                 columns: table => new
                 {
-                    SpecialtyID = table.Column<int>(type: "int", nullable: false)
+                    SpecialistID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SpecialtyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Specialists", x => x.SpecialtyID);
+                    table.PrimaryKey("PK_Specialists", x => x.SpecialistID);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,6 +51,7 @@ namespace PRN221_Project_MedAppoint.Migrations
                     RoleID = table.Column<int>(type: "int", nullable: true),
                     Avatar = table.Column<string>(type: "VARCHAR(255)", maxLength: 255, nullable: true),
                     Gender = table.Column<bool>(type: "bit", nullable: true),
+                    DoctorPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -73,7 +74,7 @@ namespace PRN221_Project_MedAppoint.Migrations
                     DoctorID = table.Column<int>(type: "int", nullable: true),
                     StartDate = table.Column<DateTime>(type: "Date", nullable: true),
                     EndDate = table.Column<DateTime>(type: "Date", nullable: true),
-                    SpecialtyID = table.Column<int>(type: "int", nullable: true),
+                    SpecialistID = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -81,10 +82,10 @@ namespace PRN221_Project_MedAppoint.Migrations
                 {
                     table.PrimaryKey("PK_Appointments", x => x.AppointmentID);
                     table.ForeignKey(
-                        name: "FK_Appointments_Specialists_SpecialtyID",
-                        column: x => x.SpecialtyID,
+                        name: "FK_Appointments_Specialists_SpecialistID",
+                        column: x => x.SpecialistID,
                         principalTable: "Specialists",
-                        principalColumn: "SpecialtyID");
+                        principalColumn: "SpecialistID");
                     table.ForeignKey(
                         name: "FK_Appointments_Users_DoctorID",
                         column: x => x.DoctorID,
@@ -178,18 +179,17 @@ namespace PRN221_Project_MedAppoint.Migrations
                     UsersToSpecialistID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: true),
-                    SpecialtyID = table.Column<int>(type: "int", nullable: true),
+                    SpecialistID = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsersToSpecialists", x => x.UsersToSpecialistID);
                     table.ForeignKey(
-                        name: "FK_UsersToSpecialists_Specialists_SpecialtyID",
-                        column: x => x.SpecialtyID,
+                        name: "FK_UsersToSpecialists_Specialists_SpecialistID",
+                        column: x => x.SpecialistID,
                         principalTable: "Specialists",
-                        principalColumn: "SpecialtyID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SpecialistID");
                     table.ForeignKey(
                         name: "FK_UsersToSpecialists_Users_UserID",
                         column: x => x.UserID,
@@ -253,9 +253,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                 column: "DoctorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_SpecialtyID",
+                name: "IX_Appointments_SpecialistID",
                 table: "Appointments",
-                column: "SpecialtyID");
+                column: "SpecialistID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_UserID",
@@ -303,9 +303,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToSpecialists_SpecialtyID",
+                name: "IX_UsersToSpecialists_SpecialistID",
                 table: "UsersToSpecialists",
-                column: "SpecialtyID");
+                column: "SpecialistID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersToSpecialists_UserID",

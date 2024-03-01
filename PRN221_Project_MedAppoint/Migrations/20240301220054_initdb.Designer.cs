@@ -12,7 +12,7 @@ using PRN221_Project_MedAppoint.Model;
 namespace PRN221_Project_MedAppoint.Migrations
 {
     [DbContext(typeof(MyMedDbContext))]
-    [Migration("20240226203006_initdb")]
+    [Migration("20240301220054_initdb")]
     partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("SpecialtyID")
+                    b.Property<int?>("SpecialistID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("StartDate")
@@ -58,7 +58,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasIndex("DoctorID");
 
-                    b.HasIndex("SpecialtyID");
+                    b.HasIndex("SpecialistID");
 
                     b.HasIndex("UserID");
 
@@ -252,11 +252,11 @@ namespace PRN221_Project_MedAppoint.Migrations
 
             modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Specialist", b =>
                 {
-                    b.Property<int>("SpecialtyID")
+                    b.Property<int>("SpecialistID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpecialtyID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpecialistID"), 1L, 1);
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -264,7 +264,7 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<string>("SpecialtyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SpecialtyID");
+                    b.HasKey("SpecialistID");
 
                     b.ToTable("Specialists");
                 });
@@ -284,6 +284,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<string>("Avatar")
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR(255)");
+
+                    b.Property<decimal?>("DoctorPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -326,10 +329,7 @@ namespace PRN221_Project_MedAppoint.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SpecialistSpecialtyID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SpecialtyID")
+                    b.Property<int?>("SpecialistID")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserID")
@@ -337,7 +337,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.HasKey("UsersToSpecialistID");
 
-                    b.HasIndex("SpecialistSpecialtyID");
+                    b.HasIndex("SpecialistID");
 
                     b.HasIndex("UserID");
 
@@ -350,9 +350,9 @@ namespace PRN221_Project_MedAppoint.Migrations
                         .WithMany()
                         .HasForeignKey("DoctorID");
 
-                    b.HasOne("PRN221_Project_MedAppoint.Model.Specialist", "Specialty")
+                    b.HasOne("PRN221_Project_MedAppoint.Model.Specialist", "Specialist")
                         .WithMany()
-                        .HasForeignKey("SpecialtyID");
+                        .HasForeignKey("SpecialistID");
 
                     b.HasOne("PRN221_Project_MedAppoint.Model.Users", "User")
                         .WithMany()
@@ -360,7 +360,7 @@ namespace PRN221_Project_MedAppoint.Migrations
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Specialty");
+                    b.Navigation("Specialist");
 
                     b.Navigation("User");
                 });
@@ -435,17 +435,20 @@ namespace PRN221_Project_MedAppoint.Migrations
                 {
                     b.HasOne("PRN221_Project_MedAppoint.Model.Specialist", "Specialist")
                         .WithMany()
-                        .HasForeignKey("SpecialistSpecialtyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SpecialistID");
 
                     b.HasOne("PRN221_Project_MedAppoint.Model.Users", "User")
-                        .WithMany()
+                        .WithMany("UsersToSpecialists")
                         .HasForeignKey("UserID");
 
                     b.Navigation("Specialist");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PRN221_Project_MedAppoint.Model.Users", b =>
+                {
+                    b.Navigation("UsersToSpecialists");
                 });
 #pragma warning restore 612, 618
         }
