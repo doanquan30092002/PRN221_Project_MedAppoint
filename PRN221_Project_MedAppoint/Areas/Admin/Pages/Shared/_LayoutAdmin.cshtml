@@ -65,6 +65,7 @@
                     <a asp-page="/ManageDoctor" asp-area="Admin" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Doctor</a>
                     <a asp-page="/ManageAppointment" asp-area="Admin" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Appointment</a>
                     <a asp-page="/ManagePayment" asp-area="Admin" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Payment</a>
+                    <a asp-page="/ManageService/Index" asp-area="Admin" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Service</a>
                 </div>
             </nav>
         </div>
@@ -118,6 +119,7 @@
     </div>
 
     <!-- JavaScript Libraries -->
+    @await RenderSectionAsync("Scripts", required: false)
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/admin/lib/chart/chart.min.js"></script>

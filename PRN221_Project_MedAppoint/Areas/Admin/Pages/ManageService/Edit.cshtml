@@ -1,0 +1,45 @@
+﻿@page "/edit-service"
+@model PRN221_Project_MedAppoint.Areas.Admin.Pages.ManageService.EditModel
+
+@{
+    ViewData["Title"] = "Edit Service";
+}
+
+<h1>Edit</h1>
+
+<h4>Services</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Services.ServiceID" />
+            <div class="form-group">
+                <label asp-for="Services.ServiceName" class="control-label"></label>
+                <input asp-for="Services.ServiceName" class="form-control" />
+                <span asp-validation-for="Services.ServiceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Services.Price" class="control-label"></label>
+                <input asp-for="Services.Price" class="form-control" />
+                <span asp-validation-for="Services.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Services.IsDeleted" /> @Html.DisplayNameFor(model => model.Services.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
