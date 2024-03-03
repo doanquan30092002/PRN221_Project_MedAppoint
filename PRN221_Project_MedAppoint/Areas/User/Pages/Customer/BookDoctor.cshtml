@@ -1,7 +1,5 @@
 ﻿@page "/bookDoctor"
 @model PRN221_Project_MedAppoint.Areas.User.Pages.Customer.BookDoctorModel
-@{
-}
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +7,7 @@
     <meta name="keywords" content="Cake, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cake | Template</title>
+    <title>Book Doctor</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
@@ -28,6 +26,7 @@
     <link rel="stylesheet" href="~/user/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/user/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/user/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/user/css/mini-form.css" type="text/css">
 </head>
 
 
@@ -35,81 +34,107 @@
     <div class="container">
         <div class="shop__option">
             <div class="row">
-                <div class="col-lg-7 col-md-7">
+                <div class="col-lg-6 col-md-6">
                     <div class="shop__option__search">
-                        <form action="#">
-                            <select>
-                                <option value="">Cơm rang</option>
-                                <option value="">Đồ uống</option>
-                                <option value="">Đồ ăn vặt</option>
-                                <option value="">Đồ nước</option>
-                            </select>
-                            <input type="text" placeholder="Search">
+                        <form id="searchForm" method="post" asp-page-handler="Search">
+                            <input asp-for="searchInput" placeholder="Search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-5">
+                <div class="col-lg-6 col-md-6">
                     <div class="shop__option__right">
-                        <select>
-                            <option value="">Default sorting</option>
-                            <option value="">A to Z</option>
-                            <option value="">1 - 8</option>
-                            <option value="">Name</option>
-                        </select>
-                        <a href="#"><i class="fa fa-list"></i></a>
-                        <a href="#"><i class="fa fa-reorder"></i></a>
+                        <button id="show-form-btn">Filter</button>
+                        <div id="mini-form-container">
+                            <form id="filter-form" method="post" asp-page-handler="Filter">
+                                <fieldset>
+                                    <div class="price-range">
+                                        <label asp-for="minPrice">Min price:</label>
+                                        <input asp-for="minPrice" >
+                                        <label asp-for="maxPrice">Max price:</label>
+                                        <input asp-for="maxPrice">
+                                    </div>
+                                    <div class="specialist-filter">
+                                        <label asp-for="SpecialistID">Specialist:</label>
+                                        <select asp-for="SpecialistID" asp-items="@Model.Specialists">
+                                            <option value="0">All</option>
+                                        </select>
+                                    </div>
+                                    <br />
+                                    <button type="submit">Apply</button>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            @foreach (var item in Model.Users) {
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="user/img/logo.jpg">
-                            <div class="product__label">
-                                <span>Doctor</span>
+        
+        <div class="row" id="doctor-list">
+            @if(Model.Users != null && Model.Users.Any())
+            {
+                @foreach (var item in Model.Users) {
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="user/img/logo.jpg">
+                                <div class="product__label">
+                                    <span>Doctor</span>
+                                </div>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="#">@item.User.Username</a></h6>
+                                <h6>
+                                    @foreach (var specialty in item.Specialties)
+                                    {
+                                        <span>@specialty ,</span>  
+                                    }
+                                </h6>
+                                <div class="product__item__price"> @string.Format("{0:#,##0} VND", item.User.DoctorPrice)</div>
+                                <div class="cart_add">
+                                    <a asp-page="/Customer/Checkout" asp-route-doctorID="@item.User.UserID">Book</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">@item.User.Username</a></h6>
-                            <h6>
-                                @foreach (var specialty in item.Specialties)
-                                {
-                                    <span>@specialty ,</span>  
-                                }
-                            </h6>
-                            <div class="product__item__price">@item.User.DoctorPrice VND</div>
-                            <div class="cart_add">
-                                <a href="#">Book</a>
-                            </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="container-fluid pt-4 px-4">
+                    <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
+                        <div class="col-md-6 text-center p-4">
+                            <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
+                            <h1 class="mb-4">Doctor not found, try searching again</h1>
                         </div>
                     </div>
                 </div>
             }
-            @* comment *@
         </div>
-        <div class="shop__last__option">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="shop__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><span class="arrow_carrot-right"></span></a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="shop__last__text">
-                        <p>Showing 1-9 of 10 results</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        @{
+            var pagingmodel = new Helpers.PagingModel()
+            {
+                currentPage = Model.currentPage,
+                countPages = Model.countPages,
+                generateUrl = (int? p) => Url.Page("/Customer/bookDoctor", new { p = p })
+            };
+        }
+        
+        <partial name="_Paging" model="@pagingmodel" />
     </div>
 </section>
 <!-- Shop Section End -->
+<script>
+    // JavaScript để hiển thị/ẩn form
+    document.getElementById("show-form-btn").addEventListener("click", function () {
+        var formContainer = document.getElementById("mini-form-container");
+        if (formContainer.style.display === "none" || formContainer.style.display === "") {
+            formContainer.style.display = "block";
+        } else {
+            formContainer.style.display = "none";
+        }
+    });
+</script>
 
 <!-- Js Plugins -->
 <script src="~/user/js/jquery-3.3.1.min.js"></script>
@@ -121,3 +146,7 @@
 <script src="~/user/js/owl.carousel.min.js"></script>
 <script src="~/user/js/jquery.nicescroll.min.js"></script>
 <script src="~/user/js/main.js"></script>
+
+
+
+

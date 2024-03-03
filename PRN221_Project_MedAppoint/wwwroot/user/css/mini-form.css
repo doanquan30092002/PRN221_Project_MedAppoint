@@ -1,0 +1,87 @@
+﻿#mini-form-container {
+    display: none;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: absolute;
+    top: 40px; /* Khoảng cách từ form đến nút "Hiển thị Form" */
+    right: 0;
+    z-index: 800; /* Đảm bảo form hiển thị trên các phần tử khác ngoài layout */
+}
+
+    #mini-form-container input[type="text"],
+    #mini-form-container input[type="email"],
+    #mini-form-container textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    #mini-form-container input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+#show-form-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.price-range, .specialist-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+label {
+    flex: 0 0 20%;
+    text-align: left;
+}
+
+input[type="number"], select {
+    flex: 1;
+    padding: 0.5rem;
+    width: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 0.55rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.not-found-message {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
