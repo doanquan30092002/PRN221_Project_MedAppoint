@@ -10,9 +10,9 @@ namespace PRN221_Project_MedAppoint.Model
         public int AppointmentID { get; set; }
         public int? UserID { get; set; }
         public int? DoctorID { get; set; }
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "datetime")]
         public DateTime? StartDate { get; set; }
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "datetime")]
         public DateTime? EndDate { get; set; }
         public int? SpecialistID { get; set; }
         [Column(TypeName = "varchar")]

@@ -10,7 +10,7 @@ namespace PRN221_Project_MedAppoint.Model
         public int? UserID { get; set; }
         public int? AppointmentID { get; set; }
         public decimal? Amount { get; set; }
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "datetime")]
         public DateTime? PaymentDate { get; set; }
         [Column(TypeName = "NTEXT")]
         public string? Message { get; set; }

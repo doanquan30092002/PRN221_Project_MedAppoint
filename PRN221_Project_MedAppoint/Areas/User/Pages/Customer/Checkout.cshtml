@@ -33,6 +33,8 @@
     <div class="container">
         <div class="checkout__form">
             <form method="post" asp-page-handler="BookingAppointment">
+                <input type="hidden" asp-for="Doctor.User.UserID" />
+                <input type="hidden" asp-for="Doctor.User.DoctorPrice" />
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <h6 class="checkout__title">Appoitment Details</h6>
@@ -69,13 +71,6 @@
                                     <p>Time Begin<span>*</span></p>
                                     <input asp-for="Input.BeginTime" class="form-control" />
                                     <span asp-validation-for="Input.BeginTime" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>Time End<span>*</span></p>
-                                    <input asp-for="Input.EndTime" class="form-control"/>
-                                    <span asp-validation-for="Input.EndTime" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>

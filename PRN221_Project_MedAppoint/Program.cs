@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PRN221_Project_MedAppoint.Model;
+using PRN221_Project_MedAppoint.Service;
 
 namespace PRN221_Project_MedAppoint
 {
@@ -12,6 +13,10 @@ namespace PRN221_Project_MedAppoint
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddSession();
+
+            //Momo
+            builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+            builder.Services.AddScoped<IMomoService, MomoService>();
 
             builder.Services.AddDbContext<MyMedDbContext>(options =>
             {

@@ -17,6 +17,10 @@ namespace PRN221_Project_MedAppoint.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<MomoCreatePaymentResponseModel>();
+            modelBuilder.Ignore<MomoExecuteResponseModel>();
+            modelBuilder.Ignore<MomoOptionModel>();
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Roles> Roles { get; set; }
