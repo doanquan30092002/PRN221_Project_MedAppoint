@@ -72,13 +72,21 @@
                 <td>@item.TestResults</td>
                 <td>@item.TreatmentPlans</td>
                 <td>
-                    @if(item.Appointment){
+                    @if (item.Appointment.Doctor.UserID != u.UserID)
+                    {
                         @item.Appointment.Doctor.Username
                     }
+                    else
+                    {
+                        <p>Me</p>
+                    }
+
                     
+                    
+
                     </td>
                 <td>
-                    @if (@item.Appointment.Doctor.UserID == u.UserID)
+                    @if (item.Appointment.Doctor.UserID == u.UserID)
                     {
                         <a asp-page="/Doctor/EditMedicalHistory" asp-area="User" asp-route-eMR_ID="@item.EMR_ID" asp-route-patientInformationId="@Model.Patient.UserID">Edit</a>
                     }
