@@ -18,6 +18,8 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
 
         public UserWithSpecialtiesViewModel Users { get; set; }
 
+        public string rootPath { get; set; }
+
         public IActionResult OnGetAsync()
         {
             if (HttpContext.Session.Get("user") != null)
@@ -36,6 +38,8 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                                 Specialties = u.UsersToSpecialists.Select(us => us.Specialist.SpecialtyName).ToList()
                             })
                             .FirstOrDefault();
+
+                    rootPath = Path.Combine("./", Users.User.Avatar);
 
                     return Page();
                 }

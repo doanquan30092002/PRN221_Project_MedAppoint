@@ -1,4 +1,4 @@
-﻿@using PRN221_Project_MedAppoint.Model
+﻿    @using PRN221_Project_MedAppoint.Model
 @{
     Users u = ViewData["user"] as Users;
 }
@@ -58,25 +58,20 @@
         <div class="container d-flex align-items-center">
 
             <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     @if (u.RoleID == 2)
                     {
-                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/Home">Home</a></li>
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/PaymentCallBack">Test</a></li> *@
-                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/BookDoctor">BookDoctor</a></li>
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/Checkout">Checkout</a></li> *@
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/CustomerProfileEdit">CustomerProfileEdit</a></li> *@
+                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/Home">@Localizer["home"]</a></li>
+                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/BookDoctor">@Localizer["bookDoctor"]</a></li>
                     }
                     @if (u.RoleID == 3)
                     {
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/CreateElectronicMedical">CreateElectronicMedical</a></li>
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorAppointment">DoctorAppointment</a></li>
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorDayOff">DoctorDayOff</a></li>
-                        
+
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorProfileEdit">DoctorProfileEdit</a></li>
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/EditOrDetailElectronicMedical">EditOrDetailElectronicMedical</a></li>
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/EditOrDetailElectronicMedical">EditOrDetailElectronicMedical</a></li>
@@ -88,25 +83,36 @@
                         <ul>
                             @if (u.RoleID == 2)
                             {
-                                <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/CustomerProfile">CustomerProfile</a></li>
-                                <li><a href="#">Lịch sử Appointment</a></li>
+                                <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/CustomerProfile">@Localizer["customerProfile"]</a></li>
+                                <li><a class="nav-link scrollto" asp-area="User" asp-page="/Customer/HistoryAppointment">@Localizer["historyAppointment"]</a></li>
                             }
                             @if (u.RoleID == 3)
                             {
                                 <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorProfile">DoctorProfile</a></li>
                             }
-                            <li><a asp-area="User" asp-page="/Login">LogOut</a></li>
+                            <li><a asp-area="User" asp-page="/Login">@Localizer["logout"]</a></li>
                         </ul>
                     </li>
                     
-
-
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
             <a asp-area="User" asp-page="/Appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
 
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @Thread.CurrentThread.CurrentUICulture.Name
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/Lang?culture=en">EN</a></li>
+                            <li><a class="dropdown-item" href="/Lang?culture=vi">VN</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header><!-- End Header -->
 

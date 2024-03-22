@@ -1,5 +1,9 @@
 ﻿@page "/checkout"
 @model PRN221_Project_MedAppoint.Areas.User.Pages.Customer.CheckoutModel
+@{
+    var duplicateSchedule = ViewData["duplicateSchedule"];
+    var wrongDate = ViewData["wrongDate"];
+}
 
 <head>
     <meta charset="UTF-8">
@@ -37,11 +41,11 @@
                 <input type="hidden" asp-for="Doctor.User.DoctorPrice" />
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
-                        <h6 class="checkout__title">Appoitment Details</h6>
+                        <h6 class="checkout__title">@Localizer["Appoitment Details"]</h6>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Doctor Name<span>*</span></p>
+                                    <p>@Localizer["Doctor Name"]<span>*</span></p>
                                     <input asp-for="Doctor.User.Username" disabled>
                                 </div>
                             </div>
@@ -49,7 +53,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Service<span>*</span></p>
+                                    <p>@Localizer["Service"]<span>*</span></p>
                                     <select asp-for="SpecialistID" asp-items="@Model.Specialists">
                                         <option value="0">All</option>
                                     </select>
@@ -59,51 +63,56 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Date<span>*</span></p>
+                                    <p>@Localizer["Date"]<span>*</span></p>
                                     <input asp-for="Input.Date" class="form-control" placeholder="Enter Date" />
-                                    <span asp-validation-for="Input.Date" class="text-danger"></span>
+                                    @if (wrongDate != null)
+                                    {
+                                        <span class="text-danger">@wrongDate</span>
+                                    }
+                                    else
+                                    {
+                                        <span asp-validation-for="Input.Date" class="text-danger"></span>
+                                    }
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Time Begin<span>*</span></p>
+                                    <p>@Localizer["Time Begin"]<span>*</span></p>
                                     <input asp-for="Input.BeginTime" class="form-control" />
-                                    <span asp-validation-for="Input.BeginTime" class="text-danger"></span>
+                                    @if (duplicateSchedule != null)
+                                    {
+                                        <span class="text-danger">@duplicateSchedule</span>
+                                    } else
+                                    {
+                                        <span asp-validation-for="Input.BeginTime" class="text-danger"></span>
+                                    }
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout__input">
+                        @* <div class="checkout__input">
                             <p>Appointment notes<span>*</span></p>
                             <input type="text"
                                    placeholder="Notes about your appoitment.">
-                        </div>
+                        </div> *@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
-                            <h6 class="order__title">Book Appointment</h6>
-                            <div class="checkout__order__products">Doctor <span>Price</span></div>
+                            <h6 class="order__title">@Localizer["Book Appointment"]</h6>
+                            <div class="checkout__order__products">@Localizer["Doctor"] <span>@Localizer["Price"]</span></div>
                             <ul class="checkout__total__products">
                                 <li>@Model.Doctor.User.Username.ToUpper() <span> @string.Format("{0:#,##0} VND", Model.Doctor.User.DoctorPrice)</span></li>
                             </ul>
                             <div class="checkout__input__checkbox">
                                 <label for="momo">
                                     Momo
-                                    <input type="checkbox" id="momo">
+                                    <input type="checkbox" id="momo" checked>
                                     <span class="checkmark"></span>
                                     <img src="user/img/MoMo_Logo.png" width="25">   
                                 </label>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="paypal">
-                                    Paypal
-                                    <input type="checkbox" id="paypal">
-                                    <span class="checkmark"></span>
-                                    <img src="user/img/Paypal_Logo.png" width="25">
-                                </label>
-                            </div>
-                            <button type="submit" class="site-btn">BOOK</button>
+                            <button type="submit" class="site-btn">@Localizer["BOOK"]</button>
                         </div>
                     </div>
                 </div>

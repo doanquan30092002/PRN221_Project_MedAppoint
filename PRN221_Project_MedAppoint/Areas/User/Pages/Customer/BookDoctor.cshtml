@@ -36,32 +36,32 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="shop__option__search">
-                        <form id="searchForm" method="post" asp-page-handler="Search">
-                            <input asp-for="searchInput" placeholder="Search">
+                        <form id="searchForm" method="get">
+                            <input asp-for="searchInput" placeholder="@Localizer["search"]" name="searchString">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="shop__option__right">
-                        <button id="show-form-btn">Filter</button>
+                        <button id="show-form-btn"><i class="bi bi-funnel"></i> @Localizer["filter"]</button>
                         <div id="mini-form-container">
                             <form id="filter-form" method="post" asp-page-handler="Filter">
                                 <fieldset>
                                     <div class="price-range">
-                                        <label asp-for="minPrice">Min price:</label>
+                                        <label asp-for="minPrice">@Localizer["minprice"]:</label>
                                         <input asp-for="minPrice" >
-                                        <label asp-for="maxPrice">Max price:</label>
+                                        <label asp-for="maxPrice">@Localizer["maxprice"]:</label>
                                         <input asp-for="maxPrice">
                                     </div>
                                     <div class="specialist-filter">
-                                        <label asp-for="SpecialistID">Specialist:</label>
+                                        <label asp-for="SpecialistID">@Localizer["specialist"]:</label>
                                         <select asp-for="SpecialistID" asp-items="@Model.Specialists">
                                             <option value="0">All</option>
                                         </select>
                                     </div>
                                     <br />
-                                    <button type="submit">Apply</button>
+                                    <button type="submit">@Localizer["apply"]</button>
                                 </fieldset>
                             </form>
                         </div>
@@ -76,11 +76,22 @@
                 @foreach (var item in Model.Users) {
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="user/img/logo.jpg">
-                                <div class="product__label">
-                                    <span>Doctor</span>
+                            @if(item.User.Avatar != null)
+                            {
+                                <div class="product__item__pic set-bg" data-setbg="@item.User.Avatar">
+                                    <div class="product__label">
+                                        <span>@Localizer["doctor"]</span>
+                                    </div>
                                 </div>
-                            </div>
+                            } 
+                            else
+                            {
+                                <div class="product__item__pic set-bg" data-setbg="user/img/logo.jpg">
+                                    <div class="product__label">
+                                        <span>@Localizer["doctor"]</span>
+                                    </div>
+                                </div>
+                            }
                             <div class="product__item__text">
                                 <h6><a href="#">@item.User.Username</a></h6>
                                 <h6>
@@ -91,7 +102,7 @@
                                 </h6>
                                 <div class="product__item__price"> @string.Format("{0:#,##0} VND", item.User.DoctorPrice)</div>
                                 <div class="cart_add">
-                                    <a asp-page="/Customer/Checkout" asp-route-doctorID="@item.User.UserID">Book</a>
+                                    <a asp-page="/Customer/Checkout" asp-route-doctorID="@item.User.UserID">@Localizer["book"]</a>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +115,7 @@
                     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
                         <div class="col-md-6 text-center p-4">
                             <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
-                            <h1 class="mb-4">Doctor not found, try searching again</h1>
+                            <h1 class="mb-4">@Localizer["notfound"]</h1>
                         </div>
                     </div>
                 </div>
@@ -116,7 +127,7 @@
             {
                 currentPage = Model.currentPage,
                 countPages = Model.countPages,
-                generateUrl = (int? p) => Url.Page("/Customer/bookDoctor", new { p = p })
+                generateUrl = (int? p) => Url.Page("/Customer/bookDoctor", new { p = p, searchString = Model.searchInput })
             };
         }
         

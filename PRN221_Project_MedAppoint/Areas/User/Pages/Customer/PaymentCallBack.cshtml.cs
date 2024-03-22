@@ -23,6 +23,14 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
 		{
 			response = await _momoService.PaymentExecuteAsync(HttpContext.Request.Query);
 
+			if(response.Message.Equals("Bad request"))
+			{
+				Appointments deleteAppointment = await _context.Appointments.FirstOrDefaultAsync(a => a.AppointmentID == int.Parse(response.AppointmentId));
+				deleteAppointment.IsDeleted = true;
+				deleteAppointment.Status = Status.Cancelled.ToString();
+				_context.SaveChanges();
+			}
+
             byte[] userBytes = HttpContext.Session.Get("user");
 			string serializedUser = Encoding.UTF8.GetString(userBytes);
 			Users u = JsonSerializer.Deserialize<Users>(serializedUser);

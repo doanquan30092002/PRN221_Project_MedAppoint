@@ -1,0 +1,75 @@
+﻿@page "/history-appointment"
+@using System.Globalization;
+@model PRN221_Project_MedAppoint.Areas.User.Pages.Customer.HistoryAppointmentModel
+@{
+
+}
+
+<section class="historyAppointment">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h4 class="mb-0">@Localizer["History Appointment"]</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col">@Localizer["Date"]</th>
+                            <th scope="col">@Localizer["Invoice"]</th>
+                            <th scope="col">@Localizer["Doctor"]</th>
+                            <th scope="col">@Localizer["Amount"]</th>
+                            <th scope="col">@Localizer["Status"]</th>
+                            <th scope="col">@Localizer["Action"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.appointments)
+                        {
+                            <tr>
+                                <td>@item.StartDate.Value.Day @item.StartDate.Value.ToString("MMMM") @item.StartDate.Value.Year</td>
+                                <td>INV-@item.AppointmentID</td>
+                                <td>@item.Doctor.Username</td>
+                                <td> @string.Format("{0:#,##0} VND", item.Doctor.DoctorPrice)</td>
+                                @if (item.Status.Equals("Pending"))
+                                {
+                                    <td><span class="bg bg-warning">@item.Status</span></td>
+                                }
+                                else if (@item.Status.Equals("Approved"))
+                                {
+                                    <td><span class="bg bg-success">@item.Status</span></td>
+                                } 
+                                else
+                                {
+                                    <td><span class="bg bg-danger">@item.Status</span></td>
+                                }
+
+                                @if (item.Status.Equals("Pending"))
+                                {
+                                    <td><a class="btn btn-sm btn-danger" asp-page-handler="CancelAppointment" asp-route-appointmentId="@item.AppointmentID">@Localizer["Cancelled"]</a></td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+
+                @{
+                    var pagingmodel = new Helpers.PagingModel()
+                    {
+                        currentPage = Model.currentPage,
+                        countPages = Model.countPages,
+                        generateUrl = (int? p) => Url.Page("/Customer/HistoryAppointment", new { p = p })
+                    };
+                }
+                <partial name="_Paging" model="@pagingmodel" />
+            </div>
+        </div>
+    </div>
+    <!-- Recent Sales End -->
+</section>
+<br/>

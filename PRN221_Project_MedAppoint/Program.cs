@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using PRN221_Project_MedAppoint.Model;
 using PRN221_Project_MedAppoint.Service;
@@ -10,8 +11,12 @@ namespace PRN221_Project_MedAppoint
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages()
+                    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                    .AddDataAnnotationsLocalization();
             builder.Services.AddSession();
 
             //Momo
@@ -24,6 +29,14 @@ namespace PRN221_Project_MedAppoint
                 options.UseSqlServer(connectString);
             });
             var app = builder.Build();
+
+            // Multilingual
+            var supportedCultures = new[] { "en", "vi" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
