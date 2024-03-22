@@ -1,0 +1,56 @@
+﻿@page
+@model PRN221_Project_MedAppoint.Areas.Admin.Pages.UpdateStatusAppointmentModel
+@{
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Horizontal Form</h6>
+                <form method="post" asp-page="/UpdateStatusAppointment" asp-route-appointmentID="@ViewData["appointmentID"]" asp-route-FilterStatus="@ViewData["FilterStatus"]">
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Patient Name</label>
+                        <div class="col-sm-10">
+                            <input  class="form-control" asp-for="Appointment.User.Username" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Doctor Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Appointment.Doctor.Username" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Specialist</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Appointment.Specialist.SpecialtyName" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Start Date</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Appointment.StartDate" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">End Date</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Appointment.EndDate" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="valueSelectStatus">
+                                <option value="Pending">Pending</option>
+                                <option value="Confirmed">Confirmed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

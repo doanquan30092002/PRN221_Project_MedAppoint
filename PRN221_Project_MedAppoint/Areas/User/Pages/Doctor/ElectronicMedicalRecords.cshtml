@@ -1,0 +1,80 @@
+﻿@page "/electronic-medical-records"
+@using PRN221_Project_MedAppoint.Model
+@model PRN221_Project_MedAppoint.Areas.User.Pages.Doctor.ElectronicMedicalRecordsModel
+@{
+    Users patient = ViewData["PatientInformation"] as Users;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tóm tắt hồ sơ bệnh án</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Summary of medical records</h1>
+    <h2>Patient information</h2>
+    
+    <table>
+        <tr>
+            <th>Full Name</th>
+            <td>@patient.Username</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>@patient.Phone</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>@(patient.Gender == true? "Male": "Female")</td>
+        </tr>
+        <tr>
+            <th>Patient code</th>
+            <td>PI-@patient.UserID</td>
+        </tr>
+    </table>
+    <br />
+    <h2>Medical History</h2>
+    <a asp-area="User" asp-page="/Doctor/CreateElectronicMedical" asp-route-appointmentID="@ViewData["appointmentID"]" asp-route-patientInformationId="@ViewData["patientInformationId"]"><button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"> <i class="mdi mdi-account-plus"></i>Creat Electronic Medical Records </button></a>
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>Date Time</th>
+            <th>Test Results</th>
+            <th>Treatment Plans</th>
+            <th>Doctor</th>
+        </tr>
+        @foreach (var item in ViewData["MedicalHistory"] as List<ElectronicMedicalRecords>)
+        {
+            <tr>
+                <td>@item.LastUpdated</td>
+                <td>@item.TestResults</td>
+                <td>@item.TreatmentPlans</td>
+                <td>@item.Appointment.Doctor.Username</td>
+            </tr>
+        }
+    </table>
+    <br />
+</body>
+</html>
