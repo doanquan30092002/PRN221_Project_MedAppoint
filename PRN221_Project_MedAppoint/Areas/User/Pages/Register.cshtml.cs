@@ -27,6 +27,7 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages
 
             if (u != null)
             {
+                ViewData["mess"] = "Username has exits";
                 return Page();
             }
 
