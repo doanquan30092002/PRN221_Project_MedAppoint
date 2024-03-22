@@ -74,12 +74,7 @@
                     @if (u.RoleID == 3)
                     {
                         <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorAppointment">Appointment</a></li>
-                         @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/CreateElectronicMedical">CreateElectronicMedical</a></li> *@
-                        
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorDayOff">DoctorDayOff</a></li> *@
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/DoctorProfileEdit">DoctorProfileEdit</a></li> *@
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/EditOrDetailElectronicMedical">EditOrDetailElectronicMedical</a></li> *@
-                        @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/ListDoctorDayOff">ListDoctorDayOff</a></li> *@
+                        <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctor/ListPatient">Tracking Medical History </a></li>
                     }
                     @* <li><a class="nav-link scrollto" asp-area="User" asp-page="/Departments">Departments</a></li>
                     <li><a class="nav-link scrollto" asp-area="User" asp-page="/Doctors">Doctors</a></li> *@
@@ -105,7 +100,7 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a asp-area="User" asp-page="/Appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+            @* <a asp-area="User" asp-page="/Appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a> *@
 
         </div>
     </header><!-- End Header -->

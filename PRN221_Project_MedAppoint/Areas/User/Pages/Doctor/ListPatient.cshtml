@@ -35,14 +35,14 @@
                 <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
-                            <h4 class="card-title card-title-dash">Appointment</h4>
+                            <h4 class="card-title card-title-dash">List Patient</h4>
                         </div>
                         <div>
                             <div class="shop__option__search">
-                                @* <form id="searchForm" method="get" asp-page-handler="Search">
+                                <form id="searchForm" method="get" asp-page-handler="Search">
                                     <input asp-for="CurrentFilter" placeholder="Search" name="SearchString">
                                     <button type="submit"><i class="fa fa-search"></i></button>
-                                </form> *@
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -52,6 +52,7 @@
                                 <tr>
                                     <th>Username</th>
                                     <th>Phone</th>
+                                    <th>Email</th>
                                     <th>View</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,9 @@
                                             <h6>@item.Phone</h6>
                                         </td>
                                         <td>
+                                            <h6>@item.Email</h6>
+                                        </td>
+                                        <td>
                                             <a asp-page="/Doctor/TrackingMedicalHistory" asp-area="User" asp-route-patientInformationId="@item.UserID">View medical history</a>
                                         </td>
                                     </tr>
@@ -79,16 +83,16 @@
 
                             </tbody>
                         </table>
-                       @*  @{
+                         @{
                             var pagingmodel = new Helpers.PagingModel()
-            {
-                currentPage = Model.currentPage,
-                countPages = Model.countPages,
-                generateUrl = (int? p) => Url.Page("/Doctor/DoctorAppointment", new { p = p, SearchString = Model.CurrentFilter })
-            };
-                        }
+                                {
+                                    currentPage = Model.currentPage,
+                                    countPages = Model.countPages,
+                                    generateUrl = (int? p) => Url.Page("/Doctor/ListPatient", new { p = p, SearchString = Model.CurrentFilter })
+                                };
+                        } 
 
-                        <partial name="_Paging" model="@pagingmodel" /> *@
+                        <partial name="_Paging" model="@pagingmodel" /> 
                     </div>
                 </div>
             </div>

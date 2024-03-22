@@ -1,4 +1,91 @@
-﻿@page
+﻿@page "/tracking-Medical-history"
+@using PRN221_Project_MedAppoint.Model
 @model PRN221_Project_MedAppoint.Areas.User.Pages.Doctor.TrackingMedicalHistoryModel
 @{
+    Users u = ViewData["user"] as Users;
 }
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tóm tắt hồ sơ bệnh án</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Summary of medical records</h1>
+    <h2>Patient information</h2>
+
+    <table>
+        <tr>
+            <th>Full Name</th>
+            <td>@Model.Patient.Username</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>@Model.Patient.Phone</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>@(Model.Patient.Gender == true ? "Male" : "Female")</td>
+        </tr>
+        <tr>
+            <th>Patient code</th>
+            <td>PI-@Model.Patient.UserID</td>
+        </tr>
+    </table>
+    <br />
+    <h2>Medical History</h2>
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>Date Time</th>
+            <th>Test Results</th>
+            <th>Treatment Plans</th>
+            <th>Doctor</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model.ElectronicMedicalRecords)
+        {
+            <tr>
+                <td>@item.LastUpdated</td>
+                <td>@item.TestResults</td>
+                <td>@item.TreatmentPlans</td>
+                <td>
+                    @if(item.Appointment){
+                        @item.Appointment.Doctor.Username
+                    }
+                    
+                    </td>
+                <td>
+                    @if (@item.Appointment.Doctor.UserID == u.UserID)
+                    {
+                        <a asp-page="/Doctor/EditMedicalHistory" asp-area="User" asp-route-eMR_ID="@item.EMR_ID" asp-route-patientInformationId="@Model.Patient.UserID">Edit</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+</body>
+</html>

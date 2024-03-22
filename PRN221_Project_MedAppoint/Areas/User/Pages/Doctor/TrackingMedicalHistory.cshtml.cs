@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using PRN221_Project_MedAppoint.Model;
 using System.Text;
 using System.Text.Json;
@@ -8,7 +9,16 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Doctor
 {
     public class TrackingMedicalHistoryModel : PageModel
     {
-        public IActionResult OnGet(string SearchString)
+        private readonly MyMedDbContext _context;
+
+        public TrackingMedicalHistoryModel(MyMedDbContext context)
+        {
+            _context = context;
+        }
+
+        public Users Patient { get; set; }
+        public List<ElectronicMedicalRecords> ElectronicMedicalRecords { get; set; }
+        public IActionResult OnGet(int patientInformationId)
         {
             if (HttpContext.Session.Get("user") != null)
             {
@@ -18,6 +28,8 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Doctor
                 ViewData["user"] = u;
                 if (u.RoleID == 3)
                 {
+                    Patient = _context.Users.FirstOrDefault(x=>x.UserID==patientInformationId);
+                    ElectronicMedicalRecords = _context.ElectronicMedicalRecords.Include(x=>x.Appointment).ThenInclude(x=>x.Doctor).Where(x=>x.Appointment.UserID== patientInformationId).ToList();
                     return Page();
                 }
                 else
