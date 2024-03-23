@@ -48,7 +48,12 @@ namespace PRN221_Project_MedAppoint.Areas.User.Pages.Customer
                     }
                     Users = users;
 
-                    rootPath = Path.Combine("../", Users.Avatar);
+
+                    if (Users.Avatar != null)
+                    {
+                        rootPath = Path.Combine("./", Users.Avatar);
+                    }
+
 
 					return Page();
                 }
